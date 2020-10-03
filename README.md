@@ -1,5 +1,5 @@
 # PythonApplications
 Archive of python application examples
 
-* [PlotlyDashExercise](./PlotlyDashExercise/README.md)
+* [PlotlyDashExercise](./PlotlyDashExercise)
 * [PyGUIDevTemplate](./PyGUIDevTemplate)
