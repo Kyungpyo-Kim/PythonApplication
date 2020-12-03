@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Jinja Test Page</title>
+</head>
+<body>
+
+    <div>Jinja Test: {{title}}</div>
+    <div>Jinja Test: {{mu}}</div>
+
+    <pre>
+    abc
+    def
+    ttt 한글
+    {%- if True -%}
+        TTT
+    {%- endif -%} qqq
+    </pre>
+    
+    <hr>
+    
+    {{ "abc {ef} ghi" }} 
+    
+    <hr>
+    
+    {{ "<strong>Strong</strong>" | safe}}
+    {{ "<strong>Strong</strong>" | striptags}}
+    
+    <hr>
+
+    <pre>
+    {% raw %}
+    {% if True %}
+    TTT
+    {% endif %}
+    {% endraw %}
+    </pre>
+
+    <hr>
+    
+    <ul>
+        {% for item in lst %}
+            <li>{{item[0]}}: {{item[1]}} - {{loop.index}}</li>
+        {% endfor%}
+    </ul>
+    <ul>
+        {% for item in lst %}
+            <li>{{item[0]}}: {{item[1]}} - {{loop.revindex}}</li>
+        {% endfor%}
+    </ul>
+
+    <ul>
+        {% for title, name, hide in lst if not hide %}
+            <li>{{title}}: {{name}} - {{loop.first}}</li>
+            <li>{{title}}: {{name}} - {{loop.last}}</li>
+            <li>{{title}}: {{name}} - {{loop.length}}</li>
+            <li>{{title}}: {{name}} - {{loop.depth}}</li>
+        {% endfor%}
+    </ul>
+
+    <hr>
+
+    <ul>
+        {% for item in lst %}
+            <li class="{{loop.cycle('aaa', 'bbb')}}">{{item[0]}}: {{item[1]}} - {{loop.revindex}}</li>
+        {% else %}
+            <li>There is no data</li>
+        {% endfor%}
+        {% for item in lst2 %}
+            <li class="{{loop.cycle('aaa', 'bbb')}}">{{item[0]}}: {{item[1]}} - {{loop.revindex}}</li>
+        {% else %}
+            <li>There is no data</li>
+        {% endfor%}
+    </ul>
+
+</body>
+</html>

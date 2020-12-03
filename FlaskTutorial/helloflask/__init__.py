@@ -1,10 +1,12 @@
 from flask import Flask
 from flask import g
 from flask import request, Response, make_response, session
+from flask import render_template, Markup
 from datetime import datetime, date, timedelta
 
 app = Flask(__name__)
 app.debug = True
+# app.jinja_env.trim_blocks = True
 
 app.config.update(
     SECRET_KEY = 'MY super secret key',
@@ -13,6 +15,35 @@ app.config.update(
 )
 
 # app.config['SERVER_NAME']='local.com:5000'
+
+@app.route('/tmpl')
+def tmpl():
+    tit = Markup("<strong>Title</strong>")
+    mu = Markup("<h1>iii = <i>%s</i></h>")
+    h = mu % "Italic"
+    print("h=", h)
+    lst2 = []
+    lst = [("만남1", "김건모", False), ("만남2", "노사연", False), ("만남3", "노오연",  True), ("만남4", "노육연", True)]
+    return render_template('index.html', title=tit, mu = h, lst=lst, lst2=lst2)
+
+class Nav:
+    def __init__(self, num, title, name, hide, children=[], url='#'):
+        self.title = title
+        self.url = url
+        self.children = children
+
+@app.route('/tmpl2')
+def tmpl2():
+    a = (1, "만남1", "김건모", False, [])
+    b = (2, "만남2", "노사연", False, [a])
+    c = (3, "만남3", "익명", False, [a, b])
+    d = (4, "만남4", "익명", False, [a, b, c])
+
+    nav_a = Nav(1, "만남1", "김건모", False, [])
+    nav_b = Nav(2, "만남2", "노사연", False, [a])
+    nav_c = Nav(3, "만남3", "익명", False, [a, b])
+    nav_d = Nav(4, "만남4", "익명", False, [a, b, c])
+    return render_template('index2.html', lst=[a,b,c,d], navs = [nav_a, nav_b, nav_c, nav_d])
 
 @app.route('/sd')
 def helloworld_local():

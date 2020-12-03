@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jinja Test Page 2</title>
+
+    <style>
+        .font-sm { font-size: 0.9rem;}
+    </style>
+</head>
+<body>
+    <ul>
+        {% for rank, title, name, hide, ref in lst recursive %}
+        <li class="{{loop.cycle('aaa', 'bbb')}}">
+            <small>{{rank}} / {{loop.length}}</small> {{title}}: {{name}}
+            {%- if ref -%}
+            <ul class="sub">
+                {{ loop(ref) }}
+            </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+
+    <ul>
+        {% for nav in navs recursive %}
+        <li>
+            <a href="{{nav.url | e}}">
+                <small>{{nav.title}} / {{loop.length}}</small> {{nav.title}}: {{nav.name}}
+            </a>
+            {%- if nav.children -%}
+            <ul class="{% if loop.depth != 1%} font-sm {% endif %}">
+                {{ loop(nav.children) }}
+            </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
