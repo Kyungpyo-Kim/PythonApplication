@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jinja Test Page 2</title>
-
-    <style>
-        .font-sm { font-size: 0.9rem;}
-    </style>
+    <!-- <link rel="stylesheet" href="static/css/style.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
 </head>
 <body>
+    <div>
+        Copyright <a href="/tmpl2">IndiFlex Senior Coding</a>
+        Copyright <a href="{{ url_for('tmpl2')}}">IndiFlex Senior Coding</a>
+    </div>
     <ul>
         {% for rank, title, name, hide, ref in lst recursive %}
         <li class="{{loop.cycle('aaa', 'bbb')}}">
@@ -39,5 +41,24 @@
         </li>
         {% endfor %}
     </ul>
+
+    <hr>
+
+    <ul>
+        {% for nav in navs recursive %}
+        <li>
+            <a href="{{nav.url | e}}">
+                <small>{{nav.title}} / {{loop.length}}</small> {{nav.title}}: {{nav.name}}
+            </a>
+            {%- if nav.children -%}
+                {% set outer_loop = loop %}
+                {% for children in nav.children %}
+                    <p>{{outer_loop.index}} - {{loop.index}} : {{children.title}}</p>
+                {% endfor %}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+
 </body>
 </html>

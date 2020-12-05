@@ -16,6 +16,11 @@ app.config.update(
 
 # app.config['SERVER_NAME']='local.com:5000'
 
+@app.route('/main')
+def main():
+    return render_template('main.html', title='Title')
+
+
 @app.route('/tmpl')
 def tmpl():
     tit = Markup("<strong>Title</strong>")
