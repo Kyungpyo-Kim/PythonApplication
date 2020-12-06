@@ -5,17 +5,30 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Material Design Bootstrap</title>
+  <title>{% block document_title %}Melon Top 100{% endblock %}</title>
   <!-- Font Awesome -->
   
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-  <!-- Bootstrap core CSS -->
-  <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
-  <!-- Material Design Bootstrap -->
-  <link href="{{ url_for('static', filename='mdb.min.css')}}" rel="stylesheet">
   <!-- Your custom styles (optional) -->
-  <link href="{{ url_for('static', filename='style.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{{ url_for('static', filename='css/mdb.min.css') }}" rel="stylesheet">
 </head>
+
+{% macro test_macro(type) -%}
+<h3>
+  TEST MACRO: {{type}}
+</h3>
+{%- endmacro %}
+
+{% macro test_macro2(name, class='aaa') -%}
+<h3 class="{{class}}">
+  TEST MACRO2: {{name}} - {{test_macro.caller}}
+  <div>{{caller(name + ":QQQ")}}</div>
+</h3>
+{%- endmacro %}
 
 <body>
 
@@ -28,7 +41,7 @@
 
         <!-- Brand -->
         <a class="navbar-brand waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
-          <strong class="blue-text">MDB</strong>
+          <strong class="blue-text">Top100</strong>
         </a>
 
         <!-- Collapse -->
@@ -89,12 +102,15 @@
   </header>
   <!--Main Navigation-->
 
+  {% block test %}
+  {% endblock %}
+
   <!--Main layout-->
   <main class="mt-5 pt-5">
     <div class="container">
 
-        {% block main %}
-	{% endblock %}
+      {% block main %}
+	    {% endblock %}
 
     </div>
   </main>
@@ -164,19 +180,74 @@
   </footer>
   <!--/.Footer-->
 
+
+   <!-- Modal -->
+   <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h3 class="modal-title" id="exampleModalLabel"><strong><i class="fas fa-sign-in-alt"></i> Sign In</strong></h3>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+         <!-- Default form login -->
+         <form class="text-center border border-light p-5">
+         
+           <p class="h4 mb-4"><strong>Sign In</strong></p>
+         
+           <!-- Email -->
+           <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+         
+           <!-- Password -->
+           <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+         
+           <div class="d-flex justify-content-around">
+             <div>
+               <!-- Remember me -->
+               <div class="custom-control custom-checkbox">
+                 <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                 <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+               </div>
+             </div>
+             <div>
+               <!-- Forgot password -->
+               <a href="">Forgot password?</a>
+             </div>
+           </div>
+         
+           <!-- Sign in button -->
+           <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+         
+           <!-- Register -->
+           <p>Not a member?
+             <a href="">Register</a>
+           </p>
+         </form>
+         <!-- Default form login -->
+       </div>
+       <!-- <div class="modal-footer">
+       </div> -->
+     </div>
+   </div>
+ 
   <!-- SCRIPTS -->
   <!-- JQuery -->
-  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="static/js/jquery-3.4.1.min.js"></script>
   <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="js/popper.min.js"></script>
+  <script type="text/javascript" src="static/js/popper.min.js"></script>
   <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <script type="text/javascript" src="static/js/mdb.min.js"></script>
   <!-- Initializations -->
   <script type="text/javascript">
     // Animations initialization
     new WOW().init();
+
+    $('#basicExampleModal').modal('show');
 
   </script>
 </body>
