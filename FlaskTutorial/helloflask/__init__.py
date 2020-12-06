@@ -16,6 +16,10 @@ app.config.update(
 
 # app.config['SERVER_NAME']='local.com:5000'
 
+@app.route('/')
+def idx():
+    return render_template("app.html")
+
 @app.route('/main')
 def main():
     return render_template('main.html', title='Title')
@@ -102,7 +106,7 @@ def dt():
     datestr = request.values.get('date', date.today(), type=ymd('%Y-%m-%d'))
     return "우리나라 시간 형식: " + str(datestr)
 
-@app.route('/')
+@app.route('/hello_world')
 def helloworld():
     return "hello flask world"
 
