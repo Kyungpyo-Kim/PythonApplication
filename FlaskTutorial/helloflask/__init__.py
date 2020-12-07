@@ -16,9 +16,21 @@ app.config.update(
 
 # app.config['SERVER_NAME']='local.com:5000'
 
+class Radio:
+    def __init__(self, name, id, value, checked):
+        self.name = name
+        self.id = id
+        self.value = value
+        self.checked = checked
+
 @app.route('/')
 def idx():
-    return render_template("app.html")
+    r1 = Radio('aaa', '123', '456', 'checked')
+    r2 = Radio('aaa', '123', '456', 'checked')
+    r3 = Radio('aaa', '123', '456', '')
+    r4 = Radio('aaa', '123', '456', '')
+    radio_list = [r1, r2, r3, r4]
+    return render_template("app.html", ttt="TTT", radio_list=radio_list)
 
 @app.route('/main')
 def main():

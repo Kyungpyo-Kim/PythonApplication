@@ -1,14 +1,34 @@
 {% extends "base.html" %}
+{% import "macro/tests.html" as cm with context -%}
+{% from "macro/tests.html" import test_macro -%}
+{% from "macro/forms.html" import input, radios, radio, textarea, checkbox, select -%}
 
 {% block test %}
+<p>{{ttt}}::{{ cm.test_macro('TTTTTTTT1122333') }}</p>
+<p>{{ test_macro('QQQQQQQQQQQ') }}</p>
 
-  <p>{{ test_macro('password') }}</p>
+{% call(x) cm.test_macro2('Hong', 'bbb') %}
+<p>This is app.html.call block: <strong>{{x}}</strong></p>
+{% endcall %}
 
-  {% call(x) test_macro2('Kim', 'bbb') %}
-    <p>This is main.macro.call block: {{x}}</p>
-  {% endcall %}
+<form class="container">
+    <div class="form-group">
+        {{radio('r11', 'rdo', 'val1', 'Value1')}}
+        {{radio('r22', 'rdo', 'val2', 'Value2', "checked")}}
+        {{radio('r33', 'rdo', 'val3', 'Value3')}}
+    </div>
+
+    {{radios(radioList)}}
+
+    {{textarea('idta', 'content', 'default value')}}
+
+    {{checkbox( dict(id='chk1', name='chkname1', checked='checked', text="TEXT") )}}
+
+    {{select([ dict(id='selid1', text='seltext1', selected=False), dict(id='selid2', text='seltext2', selected=True)])}}
+</form>
 
 {% endblock %}
+
 
 {% block main %}
 
