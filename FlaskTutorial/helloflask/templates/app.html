@@ -1,11 +1,80 @@
+<!-- Your custom styles (optional) -->
+<link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
 {% extends "base.html" %}
 {% import "macro/tests.html" as cm with context -%}
 {% from "macro/tests.html" import test_macro -%}
-{% from "macro/forms.html" import input, radios, radio, textarea, checkbox, select -%}
+{% from "macro/forms.html" import input, radios, radio, textarea, checkbox, select, modal -%}
 
 {% block test %}
+<p>{{today | ymd('%y-%m') | safe }}</p>
+<p>{{today | simpledate | safe }}</p>
+<p>{{3096 | filesizeformat(True) }}</p>
+<p>{{"123123.123123" | float | round(2) }}</p>
 <p>{{ttt}}::{{ cm.test_macro('TTTTTTTT1122333') }}</p>
 <p>{{ test_macro('QQQQQQQQQQQ') }}</p>
+
+{% macro cal(dt) %}
+  <div class="container text-center">
+    <h1>{{dt | month}} 월</h1>
+    <table class="table table-bordered table-sm">
+      <thead>
+        <tr>
+          {%- for w in '일월화수목금토' %}
+            <th>
+              {{w}}
+            </th>
+          {% endfor -%}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in range(dt | sdt, dt | edt) | batch(7, '&nbsp;') %}
+        <tr>
+          {% for col in row %}
+          <td>
+            {% if ((col|int) <= 0) %}
+            &nbsp;
+            {% else %}
+            {{col | safe}}
+            {% endif %}
+          </td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endmacro %}
+
+<div>
+  <h1 class="text-center text-primary">
+    <small>
+      <a 
+      class="text-muted" 
+      href="/?year={{year-1}}">
+        {{year -1}}
+      </a>
+    </small>
+    {{year}} 년
+    <small>
+      <a 
+      class="text-muted" 
+      href="/?year={{year+1}}">
+        {{year + 1}}
+      </a>
+    </small>
+  </h1>
+  <div class="row">
+  {%- for mm in range(1, 13) | batch(3)%}
+    {% for m in mm %}
+      <div class="col-4">
+        {% set dt = "%s-%s-01" % (year, m) %}
+        {{cal(dt)}}
+      </div>
+    {% endfor %}  
+  {% endfor %}
+  </div>
+</div>
 
 {% call(x) cm.test_macro2('Hong', 'bbb') %}
 <p>This is app.html.call block: <strong>{{x}}</strong></p>
@@ -26,6 +95,23 @@
 
     {{select([ dict(id='selid1', text='seltext1', selected=False), dict(id='selid2', text='seltext2', selected=True)])}}
 </form>
+
+<button 
+type="button"
+onclick="openModal('mdl1')"
+class="btn btn-primary">
+  Open Model Test
+</button>
+
+{% call modal('mdl1', 'test modal', 'fas fa-users', true, "fn_test()") %}
+<h3>Modal body</h3>
+<script>
+  function fn_test(){
+    alert('123');
+    closeModal('mdl1')
+  }
+</script>
+{% endcall %}
 
 {% endblock %}
 

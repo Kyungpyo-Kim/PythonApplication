@@ -2,7 +2,9 @@ from flask import Flask
 from flask import g
 from flask import request, Response, make_response, session
 from flask import render_template, Markup
+from flask import url_for
 from datetime import datetime, date, timedelta
+from dateutil.relativedelta import relativedelta
 
 app = Flask(__name__)
 app.debug = True
@@ -30,12 +32,36 @@ def idx():
     r3 = Radio('aaa', '123', '456', '')
     r4 = Radio('aaa', '123', '456', '')
     radio_list = [r1, r2, r3, r4]
-    return render_template("app.html", ttt="TTT", radio_list=radio_list)
-
+    # today = date.today()
+    today = datetime.now()
+    d = datetime.strptime("2019-02-01", "%Y-%m-%d")
+    sdt = d.weekday() * -1
+    mm = d.month
+    edt = (d + relativedelta(months=1) - timedelta(1)).day + 1
+    year = request.args.get('year', date.today().year, int)
+    return render_template("app.html", year=year, ttt="TTT", radio_list=radio_list, today=today, sdt=sdt, mm=mm, edt=edt)
 @app.route('/main')
 def main():
     return render_template('main.html', title='Title')
 
+def make_date(dt, fmt):
+    if not isinstance(dt, date):
+        return datetime.strptime(dt, fmt)
+    else:
+        return dt
+
+@app.template_filter('sdt')
+def sdt(dt, fmt='%Y-%m-%d'):
+    d = make_date(dt, fmt)
+    wd = d.weekday()
+    return (-1 if wd == 6 else wd) * -1
+@app.template_filter('edt')
+def edt(dt, fmt='%Y-%m-%d'):
+    d = make_date(dt, fmt)
+    return (d + relativedelta(months=1) - timedelta(1)).day + 1
+@app.template_filter('month')
+def month(dt, fmt='%Y-%m-%d'):
+    return make_date(dt, fmt).month
 
 @app.route('/tmpl')
 def tmpl():
@@ -169,3 +195,35 @@ def deltsess():
     if session.get('Token'):
         del session['Token']
     return "session 이 삭제되었습니다."
+
+@app.template_filter('ymd')
+def datetime_ymd(dt, fmt='%m-%d'):
+    if isinstance(dt, date):
+        return "<strong>%s</strong>" % dt.strftime(fmt)
+    else:
+        return dt
+
+@app.template_filter('simpledate')
+def simpledate(dt):
+    if not isinstance(dt, date):
+        dt  = datetime.strptime(dt, '%Y-%m-%d %H:%M')
+    
+    if (datetime.now() - dt).days < 1:
+        fmt = "%H:%M"
+    else:
+        fmt = "%m/%d"
+    return "<strong>%s</strong>" % dt.strftime(fmt)
+
+@app.context_processor
+def override_url_for():
+    return dict(url_for=dated_url_for)
+
+import os
+def dated_url_for(endpoint, **values):
+    if endpoint == 'static':
+        filename = values.get('filename', None)
+        if filename:
+            file_path = os.path.join(app.root_path, endpoint,
+                                     filename)
+            values['q'] = int(os.stat(file_path).st_mtime)
+    return url_for(endpoint, **values)
