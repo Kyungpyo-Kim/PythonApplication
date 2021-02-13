@@ -5,3 +5,4 @@ Archive of python application studies and examples
 * [PyGUIDevTemplate](./PyGUIDevTemplate)
 * [WebScraping](./WebScraping)
 * [FlaskTutorial](./FlaskTutorial)
+* [TrackingStateEstimation](./TrackingStateEstimation)
