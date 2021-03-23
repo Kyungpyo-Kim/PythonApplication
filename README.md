@@ -6,3 +6,4 @@ Archive of python application studies and examples
 * [WebScraping](./WebScraping)
 * [FlaskTutorial](./FlaskTutorial)
 * [TrackingStateEstimation](./TrackingStateEstimation)
+* [OpenCV](./OpenCV)
