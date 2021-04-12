@@ -7,3 +7,4 @@ Archive of python application studies and examples
 * [FlaskTutorial](./FlaskTutorial)
 * [TrackingStateEstimation](./TrackingStateEstimation)
 * [OpenCV](./OpenCV)
+* [BitcoinTrading](./BitcoinTrading)
