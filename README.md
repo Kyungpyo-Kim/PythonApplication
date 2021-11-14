@@ -1,10 +1,11 @@
 # PythonApplications
 Archive of python application studies and examples
 
-* [PlotlyDashExercise](./PlotlyDashExercise)
-* [PyGUIDevTemplate](./PyGUIDevTemplate)
-* [WebScraping](./WebScraping)
-* [FlaskTutorial](./FlaskTutorial)
-* [TrackingStateEstimation](./TrackingStateEstimation)
-* [OpenCV](./OpenCV)
 * [BitcoinTrading](./BitcoinTrading)
+* [Flask](./Flask)
+* [OpenCV](./OpenCV)
+* [PlotlyDash](./PlotlyDash)
+* [PyGUIDevTemplate](./PyGUIDevTemplate)
+* [Streamlit](./Streamlit)
+* [TrackingStateEstimation](./TrackingStateEstimation)
+* [WebScraping](./WebScraping)
