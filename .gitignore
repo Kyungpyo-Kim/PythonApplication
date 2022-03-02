@@ -2,3 +2,4 @@ OpenCV/.ipynb_*
 *__pycache__*
 OpenCV/image/*
 .vscode/*
+**/.vscode/*
