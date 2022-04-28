@@ -51,7 +51,7 @@ python main.py
 pyinstaller main.py -F -w -i ../iconsample.ico
 ```
 
-![demo](https://github.com/Kyungpyo-Kim/PyGUIDevTemplate/raw/master/demo.png)
+![demo](https://github.com/Kyungpyo-Kim/PythonApplication/blob/main/PyGUIDevTemplate/demo.png?raw=true)
 
 ## TODO! 실행파일 생성 (for Linux Ubuntu)
 
