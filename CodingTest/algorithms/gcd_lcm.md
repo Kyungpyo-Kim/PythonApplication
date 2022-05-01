@@ -7,7 +7,7 @@
 def gcd(a, b):
     while b:
         a, b = b, a%b
-    return x
+    return a
 ```
 
 ## Least Common Multiple
