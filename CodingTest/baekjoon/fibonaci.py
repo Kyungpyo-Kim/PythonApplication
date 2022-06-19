@@ -25,6 +25,6 @@ def matPow(base, exp):
         exp //= 2
     
     return matMul(res, base)
-
-mat = [[1, 1], [1, 0]]
-print(matPow(mat, n)[0][1])
+      
+mat = [[1, 1], [1, 0]] 
+print(matPow(mat, n)[0][1]) 
