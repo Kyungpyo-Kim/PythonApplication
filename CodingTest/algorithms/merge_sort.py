@@ -1,18 +1,17 @@
-from bigO import BigO
-from random import randint
-import timeit
+"""
+merge_sort.py
+"""
 
-"""
------------------------ SOLUTION -----------------------------------------------
-"""
-def solution(A: list) -> int:
-    """_summary_
+def solution(arr: list) -> int:
+    """solution
+    get the number of inversion (a, b) where a < b and arr[a] > arr[b]
 
     Args:
-        A (list): _description_
+        arr (list): array
 
     Returns:
-        int: _description_
+        int: return number of inversion
+             return -1 if inversion is larger than 1000000000
     """
     def merge(left, right, inversion):
         if inversion == -1:
@@ -39,24 +38,5 @@ def solution(A: list) -> int:
         right, inversion = merge_sort(arr[mid:], inversion)
         return merge(left, right, inversion)
 
-    _, inversion = merge_sort(A, 0)
+    _, inversion = merge_sort(arr, 0)
     return inversion
-
-"""
------------------------ BIG O -----------------------------------------------
-https://github.com/pberkes/big_O
-"""
-
-def test(array):
-    # for a in array:
-    solution(array)
-    return
-
-lib = BigO()
-# lib.runtime(test, "random", 10000)
-# lib.runtime(test, "sorted", 10000)
-lib.test(test, "random")
-lib.test(test, "sorted")
-lib.test(test, "reversed")
-lib.test(test, "partial")
-lib.test(test, "Ksorted")

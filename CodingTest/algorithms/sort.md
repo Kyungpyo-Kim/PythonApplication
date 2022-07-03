@@ -3,6 +3,7 @@
 ## 선택 정렬
 * 구현이 간단함
 * N + N-1 + N-2 + ... + 2  -> O(N^2)
+
 ```python
 array = [7 ,5, 9, 0, 3, 1, 6, 2, 4, 8]
 for i in range(len(array)):
@@ -17,6 +18,7 @@ print(array)
 
 ## 삽입 정렬
 * 시간 복잡도는 O(N^2) 이지만, 거의 정렬되어 있는 상태에서는 빠르게 동작 (최소 O(N) 으로 동작)
+
 ```python
 array = [7 ,5, 9, 0, 3, 1, 6, 2, 4, 8]
 for i in range(1, len(array)):
@@ -30,7 +32,6 @@ print(array)
 
 ## 퀵 정렬
 * 이상적인 경우 O(NlogN), 최악의 경우 O(N^2)
-
 
 ```python
 array = [7 ,5, 9, 0, 3, 1, 6, 2, 4, 8]
@@ -47,4 +48,29 @@ def quick_sort(arr):
     return quick_sort(left_side) + [pivot] + quick_sort(right_side)
 
 print(quick_sort(array))
+```
+
+## 병합 정렬 (merge sort)
+* O(NlogN)
+
+```python
+def merge(left, right):
+        arr = []
+        i = j = 0
+        while i < len(left) or j < len(right):
+            if j == len(right) or i != len(left) and left[i] <= right[j]:
+                arr.append(left[i])
+                i += 1
+            else:
+                arr.append(right[j])
+                j += 1
+        return arr
+
+    def merge_sort(arr):
+        if len(arr) <= 1:
+            return arr
+        mid = len(arr) // 2
+        left = merge_sort(arr[:mid])
+        right = merge_sort(arr[mid:])
+        return merge(left, right)
 ```
