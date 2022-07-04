@@ -1,0 +1,3 @@
+# Algorithms
+
+* [sort](sort.md)
