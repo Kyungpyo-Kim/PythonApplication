@@ -28,8 +28,8 @@ def solution(A: list, K: int) -> str:
             print(start, end)
             print(max_val)
             print(max_pos)
-            print(min_val)
-            print(min_pos)
+            print(min_val) 
+            print(min_pos) 
 
             while max_tail >= max_head and max_val[max_tail] <= A[end]:
                 max_tail -= 1
