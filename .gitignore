@@ -3,3 +3,4 @@ OpenCV/.ipynb_*
 OpenCV/image/*
 .vscode/*
 **/.vscode/*
+env/**
