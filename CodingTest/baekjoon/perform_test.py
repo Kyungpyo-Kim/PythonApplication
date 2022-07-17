@@ -1,12 +1,13 @@
+from bigO import BigO
+from random import randint
+import timeit
+
+"""
+----------------------- SOLUTION -----------------------------------------------
+"""
 def solution(A: list, K: int) -> str:
-    """_summary_
-
-    Args:
-        A (list): _description_
-        K (int): _description_
-
-    Returns:
-        str: _description_
+    """
+    solution
     """
     length = len(A)
     max_val = [0 for _ in range(length+1)]
@@ -22,7 +23,14 @@ def solution(A: list, K: int) -> str:
     result = 0
     end = 0
     for start in range(length):
+        print(f"start: {start}")
         while end < length:
+            print(start, end)
+            print(max_val)
+            print(max_pos)
+            print(min_val) 
+            print(min_pos) 
+
             while max_tail >= max_head and max_val[max_tail] <= A[end]:
                 max_tail -= 1
             max_tail += 1
@@ -50,3 +58,22 @@ def solution(A: list, K: int) -> str:
     return result
 
 print(solution([3,5,7,6,3], 2))
+
+"""
+----------------------- BIG O -----------------------------------------------
+https://github.com/pberkes/big_O
+"""
+
+# def test(array):
+#     # for a in array:
+#     solution(array)
+#     return
+
+# lib = BigO()
+# lib.runtime(test, "random", 10000)
+# lib.runtime(test, "sorted", 10000)
+# lib.test(test, "random")
+# lib.test(test, "sorted")
+# lib.test(test, "reversed")
+# lib.test(test, "partial")
+# lib.test(test, "Ksorted")

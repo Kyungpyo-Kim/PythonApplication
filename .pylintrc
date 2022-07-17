@@ -1,0 +1,27 @@
+[MASTER]
+init-hook="from pylint.config import find_pylintrc;import os, sys; sys.path.append(os.path.dirname(find_pylintrc()))"
+
+[pre-commit-hook]
+command=custom_pylint
+
+[FORMAT]
+max-public-methods=21
+good-names=x,y,z,f,i,j
+
+[MEMBERS]
+generated-members=cv2.*
+
+[TYPECHECK]
+ignored-modules = lzf
+
+[MESSAGES CONTROL]
+; disable=
+;         too-many-instance-attributes,
+;         loccally-disabled,
+;         no-self-use,
+;         bare-except,
+;         broad-except,
+;         eval-used,
+;         too-many-lines,
+;         too-many-branches,
+;         too-many-public-methods
