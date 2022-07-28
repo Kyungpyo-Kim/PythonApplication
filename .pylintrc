@@ -5,8 +5,8 @@ init-hook="from pylint.config import find_pylintrc;import os, sys; sys.path.appe
 command=custom_pylint
 
 [FORMAT]
-max-public-methods=21
-good-names=x,y,z,f,i,j
+; max-public-methods=21
+good-names=x,y,z,f,i,j,N
 
 [MEMBERS]
 generated-members=cv2.*

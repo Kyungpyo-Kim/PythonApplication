@@ -6,6 +6,8 @@ repos:
         additional_dependencies:
         - .
         - numpy
+        - matplotlib
+        - torch
         args:
             - --rcfile=.pylintrc
             - -d duplicate-code
