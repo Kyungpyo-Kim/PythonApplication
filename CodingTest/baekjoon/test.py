@@ -22,3 +22,6 @@ def solution():
             high = height
 
     print(low)
+
+
+solution()
