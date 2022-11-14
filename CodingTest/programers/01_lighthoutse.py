@@ -1,3 +1,5 @@
+# 프로그래머스 레벨 3 - 등대 - 연습문제
+
 import sys
 
 sys.setrecursionlimit(1000000)
