@@ -4,3 +4,4 @@ OpenCV/image/*
 .vscode/*
 **/.vscode/*
 env/**
+.DS_Store
