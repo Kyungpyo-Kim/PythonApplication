@@ -5,3 +5,5 @@ OpenCV/image/*
 **/.vscode/*
 env/**
 .DS_Store
+
+*.mp3
